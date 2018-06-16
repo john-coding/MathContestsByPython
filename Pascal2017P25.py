@@ -1,4 +1,4 @@
-def matchingDigits(n, g):
+def matching_digits(n, g):
     matched = 0
     for i in range(5):
         if (n - g) % 10 == 0:
@@ -11,40 +11,40 @@ def matchingDigits(n, g):
 
 
 def match_all(n):
-    return matchingDigits(n, 51545) == 2 and \
-           matchingDigits(n, 21531) == 1 and \
-           matchingDigits(n, 71794) == 0 and \
-           matchingDigits(n, 59135) == 1 and \
-           matchingDigits(n, 58342) == 2 and \
-           matchingDigits(n, 37348) == 2 and \
-           matchingDigits(n, 71744) == 1
+    return matching_digits(n, 51545) == 2 and \
+           matching_digits(n, 21531) == 1 and \
+           matching_digits(n, 71794) == 0 and \
+           matching_digits(n, 59135) == 1 and \
+           matching_digits(n, 58342) == 2 and \
+           matching_digits(n, 37348) == 2 and \
+           matching_digits(n, 71744) == 1
 
 
 def match_51545(n):
-    return matchingDigits(n, 51545) == 2
+    return matching_digits(n, 51545) == 2
 
 
 def match_51545_21531(n):
-    return matchingDigits(n, 51545) == 2 and\
-           matchingDigits(n, 21531) == 1
+    return matching_digits(n, 51545) == 2 and \
+           matching_digits(n, 21531) == 1
 
 
 def match_51545_21531_71794(n):
-    return matchingDigits(n, 51545) == 2 and\
-           matchingDigits(n, 21531) == 1 and\
-           matchingDigits(n, 71794) == 0
+    return matching_digits(n, 51545) == 2 and \
+           matching_digits(n, 21531) == 1 and \
+           matching_digits(n, 71794) == 0
 
 
 def compute(matching_condition):
     count = 0
-    sum = 0
+    s = 0
     for g in range(10000, 99999):
         if matching_condition(g):
             print(g, end=" ")
             count += 1
-            sum += g
-    print(count)
-    print(sum)
+            s += g
+    print("count", count)
+    print("sum:", s)
     print()
 
 
@@ -62,8 +62,8 @@ compute(match_all)
 
 """
 Fourth digit is 4:
-	71794  0
-	71744  1
+    71794  0
+    71744  1
 
 5155 1
 2151 1
@@ -84,5 +84,3 @@ If first digit is 5:
           31
         7 1
 """
-
-

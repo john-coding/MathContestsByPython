@@ -3,12 +3,12 @@
 from math import gcd
 
 
-def sum_of_digits(n):
-    sum = 0
-    while n > 0:
-        sum += n % 10
-        n = n//10
-    return sum
+def sum_of_digits(m):
+    s = 0
+    while m > 0:
+        s += m % 10
+        m = m // 10
+    return s
 
 
 for n in range(1, 100000):
@@ -19,4 +19,3 @@ for n in range(1, 100000):
     if a % 1004 == 0:
         print(sum_of_digits(n))
         break
-

@@ -1,31 +1,61 @@
-# verify that consecutive double equal signs will check whether all of the items are equal to each other
-# for a in [0, 1, 2, True, False]:
-#     for b in [0, 1, 2, True, False]:
-#         for c in [0, 1, 2, True, False]:
-#             if a == b == c:
-#                 if not (a == b and b == c and a == c):
-#                     print("A counter example", end="")
-#                 print(str((a, b, c)) + " " + str(a == b == c))
-#
-# print()
+def is_connected(f12, f13, f14, f23, f24, f34):
+    friends = {1, }
 
-disconnected_count = 0
+    # Add all friends of 1
+    if f12:
+        friends.add(2)
+    if f13:
+        friends.add(3)
+    if f14:
+        friends.add(4)
 
-for a12 in range(0, 2):
-    for a13 in range(0, 2):
-        for a14 in range(0, 2):
-            for a23 in range(0, 2):
-                for a24 in range(0, 2):
-                    for a34 in range(0, 2):
-                        # Two situations:
-                        # -- there are at most 2 pairs of people that are not friends
-                        # -- there are exactly 3 pairs of friends that forms a friendship triangle.
-                        if (a12 + a13 + a14 + a23 + a24 + a34 >= 6 - 2) or \
-                                ((a12 + a13 + a14 + a23 + a24 + a34 == 3) and
-                                 (a23 == a24 == a24 == 1 or  # missing 1
-                                  a13 == a14 == a34 == 1 or  # missing 2
-                                  a12 == a14 == a24 == 1 or  # missing 3
-                                  a12 == a23 == a13 == 1)):  # missing 4
-                            disconnected_count += 1
+    # Add all friends of all friends of 1
+    if f23:
+        if 2 in friends:
+            friends.add(3)
+        if 3 in friends:
+            friends.add(2)
+    if f24:
+        if 2 in friends:
+            friends.add(4)
+        if 4 in friends:
+            friends.add(2)
+    if f34:
+        if 3 in friends:
+            friends.add(4)
+        if 4 in friends:
+            friends.add(3)
 
-print(2 ** 6 - disconnected_count)
+    # Add all friends of all friends of all friends of 1
+    # for example when we have friendship between 1 and 2, 2 and 3, 3 and 4.
+    if f23:
+        if 2 in friends:
+            friends.add(3)
+        if 3 in friends:
+            friends.add(2)
+    if f24:
+        if 2 in friends:
+            friends.add(4)
+        if 4 in friends:
+            friends.add(2)
+    if f34:
+        if 3 in friends:
+            friends.add(4)
+        if 4 in friends:
+            friends.add(3)
+
+    return friends == {1, 2, 3, 4}
+
+
+count = 0
+for a12 in (True, False):
+    for a13 in (True, False):
+        for a14 in (True, False):
+            for a23 in (True, False):
+                for a24 in (True, False):
+                    for a34 in (True, False):
+                        if is_connected(a12, a13, a14, a23, a24, a34):
+                            count += 1
+
+print("connected cases:", count)
+print("    total cases:", 2 ** 6)
